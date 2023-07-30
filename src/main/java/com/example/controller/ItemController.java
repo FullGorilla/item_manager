@@ -29,9 +29,9 @@ public class ItemController {
 	@GetMapping
 	public String index(Model model) {
 		
-		List<Item> items = this.itemService.findAll();
+		List<Item> items = this.itemService.findByDeletedAtIsNull();
 		
-		System.out.println(items.toString());
+		model.addAttribute("items", items);
 		return "item/index";
 	}
 	
@@ -43,27 +43,28 @@ public class ItemController {
 	
 	@PostMapping("toroku")
 	public String toroku(ItemForm itemForm) {
-		
+		this.itemService.save(itemForm);
 		return "redirect:/item";
 	}
 	
 	@GetMapping("henshu/{id}")
 	public String henshuPage(@PathVariable("id") Integer id, Model model, @ModelAttribute("itemForm") ItemForm itemForm) {
-		
+		Item item = this.itemService.findById(id);
+		itemForm.setName(item.getName());
+		itemForm.setPrice(item.getPrice());
+		model.addAttribute("id", id);
 		return "item/henshuPage";
 	}
 	
 	@PostMapping("henshu/{id}")
 	public String henshu(@PathVariable("id") Integer id, @ModelAttribute("itemForm") ItemForm itemForm) {
-		
+		this.itemService.update(id, itemForm);
 		return "redirect:/item";
 	}
 	
 	@PostMapping("sakujo/{id}")
 	public String sakujo(@PathVariable("id") Integer id) {
-		
+		this.itemService.delete(id);
 		return "redirect:/item";
 	}
-	
-	
 }
