@@ -26,7 +26,7 @@ public class Item {
 	private Integer price;
 	
 	
-	public Integer gerId() {
+	public Integer getId() {
 		return this.id;
 	}
 	
