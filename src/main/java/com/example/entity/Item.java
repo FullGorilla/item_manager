@@ -1,10 +1,14 @@
 package com.example.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -25,8 +29,17 @@ public class Item {
 	@Column(name = "PRICE")
 	private Integer price;
 	
+	@Column(name = "DELETED_AT")
+	private LocalDateTime deletedAt;
 	
-	public Integer gerId() {
+	@Column(name ="CATEGORY_ID")
+	public Integer categoryId;
+	
+	@ManyToOne
+	@JoinColumn(name = "category_id", insertable = false, updatable = false)
+	private Category category;
+	
+	public Integer getId() {
 		return this.id;
 	}
 	
@@ -48,5 +61,25 @@ public class Item {
 	
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+	
+	public Integer getCategoryId() {
+		return this.categoryId;
+	}
+	
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+	
+	public Category getCategory() {
+		return this.category;
+	}
+	
+	public LocalDateTime getDeletedAt() {
+		return this.deletedAt;
+	}
+	
+	public void setDeletedAt(LocalDateTime deletedAt) {
+		this.deletedAt = deletedAt;
 	}
 }
