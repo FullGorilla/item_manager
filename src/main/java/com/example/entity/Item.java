@@ -35,6 +35,9 @@ public class Item {
 	@Column(name ="CATEGORY_ID")
 	public Integer categoryId;
 	
+	@Column(name = "STOCK")
+	private Integer stock;
+	
 	@ManyToOne
 	@JoinColumn(name = "category_id", insertable = false, updatable = false)
 	private Category category;
@@ -73,6 +76,14 @@ public class Item {
 	
 	public Category getCategory() {
 		return this.category;
+	}
+	
+	public Integer getStock() {
+		return this.stock;
+	}
+	
+	public void setStock(Integer stock) {
+		this.stock = stock;
 	}
 	
 	public LocalDateTime getDeletedAt() {
