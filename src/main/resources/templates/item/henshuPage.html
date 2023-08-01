@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::title}, ~{}, ~{::body/content()})}">
 <head>
 <meta charset="UTF-8">
 <title>商品編集ページ</title>
@@ -20,7 +20,7 @@
 			<input type="number" th:field="*{price}" placeholder="価格を入力してください">
 		</div>
 		<div>
-			<lable>カテゴリ名</lable>
+			<label>カテゴリ名</label>
 		</div>
 		<div>
 			<select th:field="*{categoryId}">
